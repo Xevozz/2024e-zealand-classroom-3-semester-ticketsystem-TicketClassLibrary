@@ -2,14 +2,9 @@
 {
     public class Car : BaseClass
     {
-        public string Licenseplate { set; get; }
-    
-        public DateTime date { set; get; }
-
-        public double Price()
-        {
-            return 240;
-        }
+        //public string Licenseplate { set; get; }
+        
+        public override double Price => 240;
 
         public string VehicleType()
         {

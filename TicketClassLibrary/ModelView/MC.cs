@@ -2,14 +2,12 @@ namespace TicketClassLibrary.ModelView;
 
 public class Mc : BaseClass
 {
-    public string Licenseplate { set; get; }
-    
+    //public string Licenseplate { set; get; }
+    public override DateTime Date { get; set; }
     public DateTime date { set; get; }
+
     
-    public double Price()
-    {
-        return 125;
-    }
+    public override double Price => 125;
 
     public string VehicleType()
     {

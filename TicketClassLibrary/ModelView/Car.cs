@@ -2,9 +2,9 @@
 {
     public class Car : BaseClass
     {
-        //public string Licenseplate { set; get; }
+        public string Licenseplate { set; get; }
     
-        //public DateTime date { set; get; }
+        public DateTime date { set; get; }
 
         public double Price()
         {

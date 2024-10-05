@@ -1,6 +1,4 @@
-
 namespace TicketClassLibrary.ModelView;
-
 
 /// <summary>
 /// Abstract BaseClass provides some implementation
@@ -17,31 +15,32 @@ public abstract class Vehicle
     /// This property is used for LisencePlate
     /// </summary>
     private DateTime _date;
-    
+
     /// <summary>
     /// Method given to the property "licenseplate".
     /// Methods ensures Numberplate info is atleast 7 or fewer characters.
     /// </summary>
     /// <exception cref="ArgumentException"></exception>
     public string Licenseplate
+    {
+        get { return _licensePlate; }
+        set
         {
-            get { return Licenseplate; }
-            set
+            //If value is larger than 7, throw exception
+            if (value.Length > 7)
             {
-                //If value is less or equal 7, throw exception
-                if (value.Length <= 7)
-                {
-                    throw new ArgumentException("Maks 7 tegn.");
-                }
-                _licensePlate = value;
+                throw new ArgumentException("Antallet af tegn må maks være 7.");
             }
+
+            _licensePlate = value;
         }
-    
+    }
+
     /// <summary>
     /// Property added to be used for the 5% discount
     /// </summary>
     public bool BroBizz { get; set; }
-    
+
     /// <summary>
     /// this property gets the "time" and "date" and sets it accordingly.
     /// </summary>
@@ -61,5 +60,4 @@ public abstract class Vehicle
     /// </summary>
     /// <returns></returns>
     public abstract string VehicleType();
-    
 }

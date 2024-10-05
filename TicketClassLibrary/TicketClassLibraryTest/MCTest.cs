@@ -1,91 +1,135 @@
-using System.Diagnostics.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TicketClassLibrary.ModelView;
-using TicketClassLibrary;
+using Xunit;
+using FluentAssertions;
 
 namespace TicketClassLibrary.TicketClassLibraryTest;
 
-    [ExcludeFromCodeCoverage]
-    [TestClass()]
-    public class MCTest
+/// <summary>
+/// UnitTests for MC
+/// </summary>
+public class MCTest
+{
+    /// <summary>
+    /// Tests the character-numbers in the Licenseplate
+    /// and checks if they're consisting of 7 characters.
+    /// </summary>
+    /// <param name="licenseplate"></param>
+    [Theory]
+    [InlineData("AF25290")]
+    public void LicenseplateTest_Valid(string licenseplate)
     {
-        [TestMethod()]
-        [DataRow("")]
-        public void LicenseplateTest_Valid(string expectedResult)
-        {
-            var mc = new MC ();
+        //Arrange
+        var mc = new MC();
+        mc.Licenseplate = licenseplate;
+        
+        //Act
+        var act  = mc.Licenseplate;
+        
+        //Assert
+        act 
+            .Should()
+            .Be(licenseplate);
+    }
 
-            mc.Licenseplate = expectedResult;
+    /// <summary>
+    /// Tests the character-numbers in the Licenseplate
+    /// and checks if they're consisting of over 7 characters.
+    /// and gives an argumentexception if it's 8 or more characters.
+    /// </summary>
+    /// <param name="licenseplate"></param>
+    [Theory]
+    [InlineData("AF252902")]
+    public void LicenseplateTest_notValid(string licenseplate)
+    {
+        //Arrange
+        var mc = new MC();
+        
+        //Act
+        var act = () => mc.Licenseplate = licenseplate;
+        
+        //Assert
+        act
+            .Should()
+            .Throw<ArgumentException>();
+    }
 
-            string actualResult = mc.Licenseplate;
+    /// <summary>
+    /// Tests to see if the expected price is correct.
+    /// </summary>
+    [Fact]
+    public void PriceTest()
+    {
+        // Arrange
+        var mc = new MC();
+        var expectedResult = 125;
 
-            Assert.AreEqual(expectedResult, actualResult);
-        }
+        // Act
+        var act = mc.Price();
 
-        [TestMethod()]
-        [DataRow("")]
-        public void LicenseplateTest_notValid(string expectedResult)
-        {
-            var mc = new MC();
+        // Assert
+        act
+            .Should()
+            .Be(expectedResult);
+    }
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => mc.Licenseplate = expectedResult);
-        }
+    /// <summary>
+    /// Tests to see if the expected price is correct
+    /// and Discount is gives accordingly with the Brobizz
+    /// </summary>
+    [Fact]
+    public void Price_With_Brobizz()
+    {
+        // Arrange
+        var mc = new MC();
+        mc.BroBizz = true;
+        var expectedPrice = 125 * 0.95;
 
-        [TestMethod()]
-        public void PriceTest()
-        {
-            var mc = new MC();
+        // Act
+        var act = mc.Price();
 
-            double expectedResult = 240;
+        // Assert
+        act
+            .Should()
+            .Be(expectedPrice);
+    }
 
-            double actualResult = mc.Price();
+    /// <summary>
+    /// Tests to see if the expected price is correct
+    /// and Discount is gives accordingly with the Brobizz
+    /// </summary>
+    [Fact]
+    public void Price_Without_Brobizz()
+    {
+        // Arrange
+        var mc = new MC();
+        mc.BroBizz = false;
+        var expectedPrice = 240;
 
-            Assert.AreEqual(expectedResult, actualResult);
+        // Act
+        var act = mc.Price();
 
-        }
+        // Assert
+        act
+            .Should()
+            .Be(expectedPrice);
+    }
 
-        [TestMethod()]
-        public void Price_With_Brobizz()
-        {
-            var mc = new MC();
-
-            mc.BroBizz = true;
-
-            double priceWithBrobizz = mc.Price();
-
-            double expectedPrice = 240 * 0.95;
-
-            double delta = 0.01;
-
-            Assert.AreEqual(expectedPrice, priceWithBrobizz, delta);
-        }
-
-        [TestMethod()]
-        public void Price_Without_Brobizz()
-        {
-            var mc = new MC();
-
-            mc.BroBizz = false;
-
-            double priceWithBrobizz = mc.Price();
-
-            double expectedPrice = 240;
-
-            double delta = 0.01;
-
-            Assert.AreEqual(expectedPrice, priceWithBrobizz, delta);
-        }
-
-        [TestMethod()]
-        public void VehicleTypeTest()
-        {
-            var mc = new MC();
-
-            string expectedResult = "Car";
-
-            string actualResult = mc.VehicleType();
-
-            Assert.AreEqual(expectedResult, actualResult);
-        }
-
+    /// <summary>
+    /// Tests if the Vehicletype is correct
+    /// </summary>
+    [Fact]
+    public void VehicleTypeTest()
+    {
+        // Arrange
+        var mc = new MC();
+        var expectedResult = "MC";
+        
+        // Act
+        var act = mc.VehicleType();
+        
+        // Assert
+        act
+            .Should()
+            .Be(expectedResult);
+    }
 }

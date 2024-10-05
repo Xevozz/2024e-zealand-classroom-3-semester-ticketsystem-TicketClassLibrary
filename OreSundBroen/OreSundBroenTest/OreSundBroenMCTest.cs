@@ -1,53 +1,66 @@
-using NUnit.Framework;
-using System.Diagnostics.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TicketClassLibrary.ModelView;
-using TicketClassLibrary;
+using FluentAssertions;
+using Xunit;
 
 namespace OreSundBroen.OreSundBroenTest;
 
-[ExcludeFromCodeCoverage]
-[TestClass()]
 public class OreSundBroenMCTest
 {
-    [TestMethod()]
+    /// <summary>
+    /// Tests if the Price with BroBizz - expectedprice = 73 kr.
+    /// </summary>
+    [Fact]
     public void Price_With_Brobizz()
     {
-        var oresundMC = new OresundMC();
-                        
-        OresundMC.BroBizz = true;
-            
-        double priceWithBrobizz = OresundMC.Price();
-                        
-        double expectedPrice = 161
-                        
-        Assert.AreEqual(actualPrice, expectedPrice);
+        // Arrange
+        var oresundMC = new OresundMc();
+        oresundMC.BroBizz = true;
+        var expectedPrice = 73;
+
+        // Act
+        var priceWithBrobizz = oresundMC.Price();
+
+        // Assert
+        priceWithBrobizz
+            .Should()
+            .Be(expectedPrice);
     }
-                    
-    [TestMethod()]
+
+    /// <summary>
+    /// Tests if the Price with BroBizz - expectedprice = 210 kr.
+    /// </summary>
+    [Fact]
     public void Price_Without_Brobizz()
     {
-           var oresundMC = new OresundMC();
-                        
-           oresundCar.BroBizz = false;
-            
-           double priceWithBrobizz = OresundMC.Price();
-                        
-           double expectedPrice = 410;
-                        
-           Assert.AreEqual(actualPrice, expectedPrice);
-     }
-            
-[TestMethod()]
-public void VehicleTypeTest()
-    {
-        var oresundMC = new OresundMC();
-                                
-        string actualVehicleType = OresundMC.VehicleType();
-                                
-        string expectedvehicleType = "Oresund MC"();
-                                
-        Assert.AreEqual(actualVehicleType, expectedvehicleType);
+        // Arrange
+        var oresundMC = new OresundMc();
+        oresundMC.BroBizz = false;
+        var expectedPrice = 210;
+
+        // Act
+        var priceWithBrobizz = oresundMC.Price();
+        
+        // Assert
+        priceWithBrobizz
+            .Should()
+            .Be(expectedPrice);
     }
-                    
-        }
+
+    /// <summary>
+    /// Tests if the Vehicletype is correct
+    /// </summary>
+    [Fact]
+    public void VehicleTypeTest()
+    {
+        // Arrange
+        var oresundMc = new OresundMc();
+        var expectedvehicleType = "Oresund MC";
+        
+        // Act
+        var actualVehicleType = oresundMc.VehicleType();
+
+        // Assert
+        actualVehicleType
+            .Should()
+            .Be(expectedvehicleType);
+    }
+}

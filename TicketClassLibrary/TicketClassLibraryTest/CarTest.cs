@@ -1,94 +1,135 @@
-using System.Diagnostics.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 using TicketClassLibrary.ModelView;
-using TicketClassLibrary;
+using Xunit;
 
 namespace TicketClassLibrary.TicketClassLibraryTest;
 
-    [ExcludeFromCodeCoverage]
-    [TestClass()]
-    public class CarTests
+/// <summary>
+/// UnitTests for Car
+/// </summary>
+public class CarTests
+{
+    /// <summary>
+    /// Tests the character-numbers in the Licenseplate
+    /// and checks if they're consisting of 7 characters.
+    /// </summary>
+    /// <param name="licenseplate"></param>
+    [Theory]
+    [InlineData("AF25290")]
+    public void LicenseplateTest_Valid(string licenseplate)
     {
-        [TestMethod()]
-        [DataRow("")]
-        public void LicenseplateTest_Valid(string expectedResult)
-        {
-            var car = new Car();
-            
-            car.Licenseplate = expectedResult;
-            
-            string actualResult = car.Licenseplate;
-            
-            Assert.AreEqual(expectedResult, actualResult);
-        }
+        // Arrange
+        var car = new Car();
+        car.Licenseplate = licenseplate;
 
-        [TestMethod()]
-        [DataRow("")]
-        [DataRow(" ")]
-        [DataRow(null)]
-        [DataRow("    ")]
-        public void LicenseplateTest_notValid(string expectedResult)
-        {
-            var car = new Car();
+        // Act
+        var act = car.Licenseplate;
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => car.Licenseplate = expectedResult);
-        }
-
-        [TestMethod()]
-        public void PriceTest()
-        {
-            var car = new Car();
-
-            double expectedResult = 240;
-            
-            double actualResult = car.Price();
-            
-            Assert.AreEqual(expectedResult, actualResult);
-
-        }
-
-        [TestMethod()]
-        public void Price_With_Brobizz()
-        {
-            var car = new Car();
-            
-            car.BroBizz = true;
-
-            double priceWithBrobizz = car.Price();
-            
-            double expectedPrice = 240 * 0.95;
-            
-            double delta = 0.01;
-            
-            Assert.AreEqual(expectedPrice, priceWithBrobizz, delta);
-        }
-        
-        [TestMethod()]
-        public void Price_Without_Brobizz()
-        {
-            var car = new Car();
-            
-            car.BroBizz = false;
-
-            double priceWithBrobizz = car.Price();
-            
-            double expectedPrice = 240;
-            
-            double delta = 0.01;
-            
-            Assert.AreEqual(expectedPrice, priceWithBrobizz, delta);
-        }
-
-        [TestMethod()]
-        public void VehicleTypeTest()
-        {
-            var car = new Car();
-            
-            string expectedResult = "Car";
-            
-            string actualResult = car.VehicleType();
-            
-            Assert.AreEqual(expectedResult, actualResult);
-        }
-        
+        // Assert
+        act
+            .Should()
+            .Be(licenseplate);
     }
+
+    /// <summary>
+    /// Tests the character-numbers in the Licenseplate
+    /// and checks if they're consisting of over 7 characters.
+    /// and gives an argumentexception if it's 8 or more characters.
+    /// </summary>
+    /// <param name="licenseplate"></param>
+    [Theory]
+    [InlineData("AF252902")]
+    public void LicenseplateTest_notValid(string licenseplate)
+    {
+        // Arrange
+        var car = new Car();
+
+        // Act
+        var act = () => car.Licenseplate = licenseplate;
+
+        // Assert
+        act
+            .Should()
+            .Throw<ArgumentException>();
+    }
+
+    /// <summary>
+    /// Tests to see if the expected price is correct.
+    /// </summary>
+    [Fact]
+    public void PriceTest()
+    {
+        // Arrange
+        var car = new Car();
+        var expectedResult = 240;
+
+        // Act
+        var act = car.Price();
+
+        // Assert
+        act
+            .Should()
+            .Be(expectedResult);
+    }
+
+    /// <summary>
+    /// Tests to see if the expected price is correct
+    /// and Discount is gives accordingly with the Brobizz
+    /// </summary>
+    [Fact]
+    public void Price_With_Brobizz()
+    {
+        // Arrange
+        var car = new Car();
+        car.BroBizz = true;
+        var expectedPrice = 240 * 0.95;
+
+        // Act
+        var act = car.Price();
+
+        // Assert
+        act
+            .Should()
+            .Be(expectedPrice);
+    }
+
+    /// <summary>
+    /// Tests to see if the expected price is correct
+    /// and Discount is gives accordingly with the Brobizz
+    /// </summary>
+    [Fact]
+    public void Price_Without_Brobizz()
+    {
+        // Arrange
+        var car = new Car();
+        car.BroBizz = false;
+        var expectedPrice = 240;
+
+        // Act
+        var act = car.Price();
+
+        // Assert
+        act
+            .Should()
+            .Be(expectedPrice);
+    }
+
+    /// <summary>
+    /// Tests if the Vehicletype is correct
+    /// </summary>
+    [Fact]
+    public void VehicleTypeTest()
+    {
+        // Arrange
+        var car = new Car();
+        var expectedResult = "Car";
+        
+        // Act
+        var act = car.VehicleType();
+        
+        // Assert
+        act
+            .Should()
+            .Be(expectedResult);
+    }
+}

@@ -19,7 +19,7 @@ namespace StoreBaeltTicketLibrary;
             
             public Vehicle? GetLicensePlate(string licensePlate)
                 {
-                    return Vehicle.(x => x.LicensePlate == licensePlate);
+                    return Vehicle.Find(x => x.LicensePlate == licensePlate);
                 }
 
             

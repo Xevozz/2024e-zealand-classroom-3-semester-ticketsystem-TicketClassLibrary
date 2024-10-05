@@ -13,11 +13,11 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         [DataRow("")]
         public void LicenseplateTest_Valid(string expectedResult)
         {
-            var mc = new Mc();
+            var mc = new MC ();
 
-            Mc.LicensePlate = expectedResult;
+            mc.Licenseplate = expectedResult;
 
-            string actualResult = Mc.LicensePlate;
+            string actualResult = mc.Licenseplate;
 
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -26,15 +26,15 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         [DataRow("")]
         public void LicenseplateTest_notValid(string expectedResult)
         {
-            var mc = new Mc();
+            var mc = new MC();
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Mc.LicensePlate = expectedResult);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => mc.Licenseplate = expectedResult);
         }
 
         [TestMethod()]
         public void PriceTest()
         {
-            var mc = new Mc();
+            var mc = new MC();
 
             double expectedResult = 240;
 
@@ -47,7 +47,7 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         [TestMethod()]
         public void Price_With_Brobizz()
         {
-            var mc = new Mc();
+            var mc = new MC();
 
             mc.BroBizz = true;
 
@@ -63,7 +63,7 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         [TestMethod()]
         public void Price_Without_Brobizz()
         {
-            var mc = new Mc();
+            var mc = new MC();
 
             mc.BroBizz = false;
 
@@ -79,7 +79,7 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         [TestMethod()]
         public void VehicleTypeTest()
         {
-            var mc = new Mc();
+            var mc = new MC();
 
             string expectedResult = "Car";
 

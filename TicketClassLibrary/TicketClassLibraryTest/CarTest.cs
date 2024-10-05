@@ -15,9 +15,9 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         {
             var car = new Car();
             
-            car.LicensePlate = expectedResult;
+            car.Licenseplate = expectedResult;
             
-            string actualResult = car.LicensePlate;
+            string actualResult = car.Licenseplate;
             
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -31,7 +31,7 @@ namespace TicketClassLibrary.TicketClassLibraryTest;
         {
             var car = new Car();
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => car.LicensePlate = expectedResult);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => car.Licenseplate = expectedResult);
         }
 
         [TestMethod()]

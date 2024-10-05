@@ -1,7 +1,7 @@
 namespace TicketClassLibrary.ModelView;
 
 /// <inheritdoc />
-public class Mc : Vehicle
+public class MC : Vehicle
 {
     /// <summary>
     /// Override the virtual class in BaseClass - Fixed price at 125 + 5% discount with BroBizz.

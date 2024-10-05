@@ -7,11 +7,13 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\net8.0\StoreBaeltTicketLibrary.xml</DocumentationFile>
+      <DocumentationFile>bin\Debug\net8.0\OreSundBroen.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="ExternDLL\" />
+      <Reference Include="TicketClassLibrary">
+        <HintPath>..\..\..\..\DLL ekstern\TicketClassLibrary.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>

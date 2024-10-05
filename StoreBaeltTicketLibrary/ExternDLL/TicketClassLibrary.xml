@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TicketClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:TicketClassLibrary.ModelView.BaseClass">
+            <summary>
+            Abstract BaseClass provides some implementation
+            but leaves Methods to the Sub-classes that inherits.
+            </summary>
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.BaseClass.Licenseplate">
+            <summary>
+            Method given to the property "licenseplate".
+            Methods ensures Numberplate info is atleast 7 or fewer characters.
+            </summary>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.BaseClass.Date">
+            <summary>
+            Virtual makes it possible to override and change date in SubClasses
+            </summary>
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.BaseClass.Price">
+            <summary>
+            Virtual makes it possible to override and change price in SubClasses
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.ModelView.BaseClass.CalculatePrice(System.Boolean)">
+            <summary>
+            Method to calculate the 5% discount given from BroBizz
+            </summary>
+            <param name="useBrobizz"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TicketClassLibrary.ModelView.Car">
+            <inheritdoc />
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.Car.Price">
+            <summary>
+            Override the virtual class in BaseClass - Fixed price at 240.
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.ModelView.Car.VehicleType">
+            <summary>
+            returns the "MC" object (MotorCycle)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketClassLibrary.ModelView.Car.#ctor(System.String,System.DateTime)">
+            <summary>
+            Constructor for the properties gives to the MC Class.
+            </summary>
+            <param name="licenseplate"></param>
+            <param name="date"></param>
+        </member>
+        <member name="M:TicketClassLibrary.ModelView.Car.ToString">
+            <summary>
+            TwoString added for easily accesible properties throughout the solution.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TicketClassLibrary.ModelView.Mc">
+            <inheritdoc />
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.Mc.Date">
+            <summary>
+            Overrides original property given in BaseClass
+            </summary>
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.Mc.date">
+            <summary>
+            Specific property given to MC Class
+            </summary>
+        </member>
+        <member name="P:TicketClassLibrary.ModelView.Mc.Price">
+            <summary>
+            Override the virtual class in BaseClass - Fixed price at 125.
+            </summary>
+        </member>
+        <member name="M:TicketClassLibrary.ModelView.Mc.VehicleType">
+            <summary>
+            returns the "MC" object (MotorCycle)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TicketClassLibrary.ModelView.Mc.#ctor(System.String,System.DateTime)">
+            <summary>
+            Constructor for the properties gives to the MC Class.
+            </summary>
+            <param name="licenseplate"></param>
+            <param name="date"></param>
+        </member>
+    </members>
+</doc>

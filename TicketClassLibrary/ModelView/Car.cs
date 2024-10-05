@@ -1,43 +1,33 @@
 ﻿namespace TicketClassLibrary.ModelView
 {
     /// <inheritdoc />
-    public class Car : BaseClass
+    public class Car : Vehicle
     {
         //public string Licenseplate { set; get; }
         
         /// <summary>
-        /// Override the virtual class in BaseClass - Fixed price at 240.
+        /// Override the virtual class in BaseClass - Fixed price at 240 + 5% discount with BroBizz.
         /// </summary>
-        public override double Price => 240;
+        public override double Price()
+            {
+                if (BroBizz)
+                {
+                    return 240 * 0.95;
+                }
+                else
+                {
+                    return 240;
+                }
+            }
 
         /// <summary>
-        /// returns the "MC" object (MotorCycle)
+        /// returns the vehicle "Car" object
         /// </summary>
         /// <returns></returns>
-        public string VehicleType()
-        {
-            return "Car";
-        }
-
-        /// <summary>
-        /// Constructor for the properties gives to the MC Class.
-        /// </summary>
-        /// <param name="licenseplate"></param>
-        /// <param name="date"></param>
-        public Car(string licenseplate, DateTime date)
-        {
-            Licenseplate = licenseplate;
-            Date = date;
-        }
-
-        /// <summary>
-        /// TwoString added for easily accesible properties throughout the solution.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return
-                $"{nameof(Licenseplate)}: {Licenseplate}, {nameof(Date)}: {Date}, {nameof(Price)}: {Price}, {nameof(VehicleType)}: {VehicleType}";
-        }
+        public override string VehicleType()
+            {
+                return "Car";
+            }
+        
     }
 }
